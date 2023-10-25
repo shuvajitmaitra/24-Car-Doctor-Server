@@ -79,6 +79,21 @@ async function run() {
             const result = await orderCollection.deleteOne(query)
             res.send(result)
         })
+
+
+        // update confirm oder to booking cart page..........
+        app.patch("/orders/:id", async(req, res)=>{
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) }
+            const updateBooking = req.body
+            const updateDoc = {
+                $set: {
+                    status: updateBooking.status,
+                },
+              };
+            const result = await orderCollection.updateOne(query, updateDoc)
+            res.send(result)
+        })
         // Send a ping to confirm a successful connection
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
