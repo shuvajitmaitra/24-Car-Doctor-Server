@@ -43,6 +43,7 @@ async function run() {
         const options = {
            
             // Include only the `title` and `imdb` fields in the returned document
+            
             projection: { _id: 1, title: 1, price: 1, img: 1 },
           };
 
@@ -54,6 +55,7 @@ async function run() {
     // sent confirmed order data to the server
     app.post('/orders', async (req, res)=>{
         const order = req.body
+        
         const result = await orderCollection.insertOne(order)
         res.send(result)
     })
